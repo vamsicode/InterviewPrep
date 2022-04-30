@@ -1,0 +1,65 @@
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A, int[] B) {
+        // write your code in Java SE 8
+
+        int n = A.length;
+        if (n == 0) 
+            return 0;
+        
+        long presumsA = 0, presumsB = 0;
+
+        for (int i = 0; i<n; ++i) {
+            presumsA += A[i];
+            presumsB += B[i];
+        }
+        
+        if (presumsA != presumsB) 
+            return 0;
+
+        long halfSum = presumsA / 2;
+        presumsA = 0;
+        presumsB = 0;
+        int result = 0;
+        
+        for (int i = 0; i < n - 1; ++i) {
+            presumsA += A[i];
+            presumsB += B[i];
+            if (presumsA == presumsB && presumsA == halfSum) 
+                result++;
+        }
+        
+        return result;
+    }
+}
+
+
+
+
+
+
+    public int solution(int[] starts, int[] ends, int n) {
+        // write your code in Java SE 8
+        int[] edgeCount = new int[n];
+        int m = starts.length;
+        int maxRank = Integer.MIN_VALUE;
+
+        for (int i = 0; i < m; i++) {
+            edgeCount[starts[i] - 1]++;
+            edgeCount[ends[i] - 1]++;
+        }
+
+        for (int i = 0; i < m; i++) {
+            int rank = edgeCount[starts[i] - 1] + edgeCount[ends[i] - 1] - 1;
+            if (rank > maxRank) {
+                maxRank = rank;
+            }
+        }
+
+        return maxRank;
+    }
